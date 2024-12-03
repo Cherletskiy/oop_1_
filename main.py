@@ -1,4 +1,24 @@
-class Student:
+class Information:
+    def __str__(self):
+        string_for_print = f"Имя: {self.name}\nФамилия: {self.surname}"
+        if self.CLASS_TYPE == "lecturer":
+            string_for_print += f"\nСредняя оценка за лекции: {self.get_average_rating()}"
+        if self.CLASS_TYPE == "student":
+            string_for_print += f"\nСредняя оценка за домашние задания: {self.get_average_rating()}"
+            string_for_print += f"\nКурсы в процессе изучения: {', '.join(self.courses_in_progress)}"
+            string_for_print += f"\nЗавершенные курсы: {', '.join(self.finished_courses)}"
+        return string_for_print
+
+    def get_average_rating(self):
+        if self.grades.values():
+            grades_lst = [i for a in self.grades.values() for i in a]
+            return round(sum(grades_lst) / len(grades_lst), 1)
+        return "Оценок нет"
+
+
+class Student(Information):
+    CLASS_TYPE = "student"
+
     def __init__(self, name, surname, gender):
         self.name = name
         self.surname = surname
@@ -21,7 +41,7 @@ class Student:
         lecturer.grades[course] += [grade]
 
 
-class Mentor:
+class Mentor(Information):
     def __init__(self, name, surname):
         self.name = name
         self.surname = surname
