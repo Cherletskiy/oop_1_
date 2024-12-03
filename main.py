@@ -32,7 +32,7 @@ class Student(Information):
     """
     CLASS_TYPE = "student"
 
-    def __init__(self, name, surname, gender):
+    def __init__(self, name: str, surname: str, gender: str):
         self.name = name
         self.surname = surname
         self.gender = gender
@@ -80,7 +80,7 @@ class Lecturer(Mentor):
     """
     CLASS_TYPE = "lecturer"
 
-    def __init__(self, name, surname):
+    def __init__(self, name: str, surname: str):
         super().__init__(name, surname)
         self.grades = {}
 
